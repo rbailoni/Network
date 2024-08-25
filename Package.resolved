@@ -1,0 +1,15 @@
+{
+  "originHash" : "3aab91a85ac39c06e96bb18f39c55bbb7cfe1d637b7656b3ba5a8c4a72975639",
+  "pins" : [
+    {
+      "identity" : "protocols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rbailoni/Protocols",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "09a34e5888956e0732b868d61b7a6431fdb0b1b2"
+      }
+    }
+  ],
+  "version" : 3
+}
