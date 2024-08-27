@@ -14,7 +14,7 @@ public final class APIManager: ManagerProtocol {
     typealias NetworkResponse = (data: Data, response: URLResponse)
     typealias Failure = APIError
     
-    public static let shared = APIManager()
+    public static let shared: ManagerProtocol = APIManager()
     private init() { }
     
     private let session = URLSession.shared
