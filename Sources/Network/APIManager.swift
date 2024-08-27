@@ -77,7 +77,7 @@ public final class APIManager: ManagerProtocol {
 private extension APIManager {
     func createRequest(from endpoint: EndPointProtocol) throws -> URLRequest {
         guard let urlPath = URL(string: endpoint.baseURL.appending(endpoint.path)),
-              var urlComponents = URLComponents(string: urlPath.path)
+              var urlComponents = URLComponents(url: urlPath, resolvingAgainstBaseURL: true)
         else {
             throw APIError.path
         }
