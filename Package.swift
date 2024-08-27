@@ -15,7 +15,7 @@ let package = Package(
             targets: ["Network"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/rbailoni/Protocols", branch: "develop")
+        .package(url: "https://github.com/rbailoni/Core", branch: "develop")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,10 +23,8 @@ let package = Package(
         .target(
             name: "Network",
             dependencies: [
-                .product(name: "NetworkProtocols", package: "Protocols")
-            ]),
-        .testTarget(
-            name: "NetworkTests",
-            dependencies: ["Network"]),
+                .product(name: "NetworkProtocols", package: "Core"),
+                .product(name: "Errors", package: "Core")
+            ])
     ]
 )

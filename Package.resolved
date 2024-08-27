@@ -1,13 +1,13 @@
 {
-  "originHash" : "3aab91a85ac39c06e96bb18f39c55bbb7cfe1d637b7656b3ba5a8c4a72975639",
+  "originHash" : "6996fd5f5e926fe184ebc5faa5f4051bca5cc0721f343df5a96f63a2db6edd1e",
   "pins" : [
     {
-      "identity" : "protocols",
+      "identity" : "core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/rbailoni/Protocols",
+      "location" : "https://github.com/rbailoni/Core",
       "state" : {
         "branch" : "develop",
-        "revision" : "09a34e5888956e0732b868d61b7a6431fdb0b1b2"
+        "revision" : "eae7d827d4736cfcd49be5f64eff1b8a9cd023a2"
       }
     }
   ],

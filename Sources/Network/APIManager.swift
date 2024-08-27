@@ -8,8 +8,9 @@
 import Foundation
 import NetworkProtocols
 import Combine
+import Errors
 
-public final class APIManager {
+public final class APIManager: ManagerProtocol {
     typealias NetworkResponse = (data: Data, response: URLResponse)
     typealias Failure = APIError
     
@@ -21,7 +22,7 @@ public final class APIManager {
     private let decoder = JSONDecoder()
     private var cancellable = Set<AnyCancellable>()
     
-    public func getData<D: Decodable>(from endpoint: EndPointProtocol, completion: @escaping (Result<D, APIError>) -> Void) {
+    public func data<D: Decodable>(from endpoint: EndPointProtocol, completion: @escaping (Result<D, APIError>) -> Void) {
         guard let request = try? createRequest(from: endpoint) else {
             completion(.failure(.request))
             return
@@ -51,7 +52,7 @@ public final class APIManager {
         }.resume()
     }
     
-    public func getData<D: Decodable>(from endpoint: EndPointProtocol) -> AnyPublisher<D, Error> {
+    public func data<D: Decodable>(from endpoint: EndPointProtocol) -> AnyPublisher<D, Error> {
         guard let request = try? createRequest(from: endpoint) else {
             return Fail(error: APIError.request).eraseToAnyPublisher()
         }
@@ -66,17 +67,9 @@ public final class APIManager {
             .eraseToAnyPublisher()
     }
     
-    public func getData<D: Decodable>(from endpoint: EndPointProtocol) async throws -> D {
+    public func data<D: Decodable>(from endpoint: EndPointProtocol) async throws -> D {
         let request = try createRequest(from: endpoint)
         let response: NetworkResponse = try await session.data(for: request)
-        return try decoder.decode(D.self, from: response.data)
-    }
-    
-    
-    public func sendData<D: Decodable, E: Encodable>(from endpoint: EndPointProtocol, with body: E) async throws -> D {
-        let request = try createRequest(from: endpoint)
-        let data = try encoder.encode(body)
-        let response: NetworkResponse = try await session.upload(for: request, from: data)
         return try decoder.decode(D.self, from: response.data)
     }
 }
